@@ -3,6 +3,7 @@ package dev.cancio.finaldex
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -10,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import dev.cancio.finaldex.repository.PokemonRepository
 import dev.cancio.finaldex.ui.theme.FinaldexTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,7 +33,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+    val repository = PokemonRepository()
+    Column {
+        repository.getPokemonList().map {
+            Text(text = "Pokemon: ${it.name}!")
+        }
+    }
 }
 
 @Preview(showBackground = true)
