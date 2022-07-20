@@ -12,39 +12,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dev.cancio.finaldex.repository.PokemonRepository
+import dev.cancio.finaldex.ui.screen.HomeScreen
 import dev.cancio.finaldex.ui.theme.FinaldexTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            FinaldexTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+            val repository = PokemonRepository()
+            AppScreen(repository)
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    val repository = PokemonRepository()
-    Column {
-        repository.getPokemonList().map {
-            Text(text = "Pokemon: ${it.name}!")
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
+fun AppScreen(repository: PokemonRepository) {
     FinaldexTheme {
-        Greeting("Android")
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            HomeScreen(repository)
+        }
     }
 }
