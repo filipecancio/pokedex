@@ -10,10 +10,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import dev.cancio.finaldex.data.model.Pokemon
 import dev.cancio.finaldex.ui.screen.HomeScreen
 import dev.cancio.finaldex.ui.screen.LikeScreen
 import dev.cancio.finaldex.ui.components.BottomNavItem.Likes
 import dev.cancio.finaldex.ui.components.BottomNavItem.Home
+import dev.cancio.finaldex.ui.screen.DetailScreen
 
 @Composable
 fun PokeBar(navController: NavController, itemList: List<BottomNavItem>)  {
@@ -43,9 +47,17 @@ fun PokeBar(navController: NavController, itemList: List<BottomNavItem>)  {
 }
 
 @Composable
-fun MainNavigation(navController: NavHostController, itemList: List<BottomNavItem>) {
-    NavHost(navController = navController, startDestination = itemList.first().route) {
-        itemList.forEach { item -> composable(item.route)  { item.screen.invoke() } }
+fun MainNavigation(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = "Home") {
+        //itemList.forEach { item -> composable(item.route)  { item.screen.invoke(navController) } }
+        composable("Home")  {  HomeScreen(navController) }
+        composable("Likes")  {  LikeScreen(navController) }
+        composable(
+            "Detail/{pokemonId}",
+            arguments = listOf(navArgument("pokemonId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            backStackEntry.arguments?.getString("pokemonId")?.let { DetailScreen(it) }
+        }
     }
 }
 
@@ -53,9 +65,9 @@ sealed class BottomNavItem(
     val route: String,
     val icon: ImageVector,
     val title: String,
-    val screen: (@Composable () -> Unit)) {
-    object Home : BottomNavItem("home", Icons.Filled.Home, "Home", { HomeScreen() })
-    object Likes : BottomNavItem("likes", Icons.Filled.Star, "Likes", { LikeScreen() })
+    val screen: (@Composable (navController: NavHostController) -> Unit)) {
+    object Home : BottomNavItem("home", Icons.Filled.Home, "Home", { })
+    object Likes : BottomNavItem("likes", Icons.Filled.Star, "Likes", {  })
 }
 
 sealed class PokedexRoutes(val itemList: List<BottomNavItem>){

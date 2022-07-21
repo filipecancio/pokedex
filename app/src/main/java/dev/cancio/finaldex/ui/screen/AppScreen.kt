@@ -39,7 +39,7 @@ fun AppScreen(repository: PokemonRepository) {
                         .padding(it),
                     contentAlignment = Alignment.Center,
                 ) {
-                    MainNavigation(navController, itemList )
+                    MainNavigation(navController)
                 }
             }
         }
