@@ -2,14 +2,22 @@
 
 package dev.cancio.finaldex.ui.screen
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import dev.cancio.finaldex.repository.PokemonRepository
+import dev.cancio.finaldex.ui.components.MainNavigation
+import dev.cancio.finaldex.ui.components.PokeBar
+import dev.cancio.finaldex.ui.components.PokeHeader
+import dev.cancio.finaldex.ui.components.PokedexRoutes.MainRoute.itemList
 import dev.cancio.finaldex.ui.theme.FinaldexTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -20,8 +28,19 @@ fun AppScreen(repository: PokemonRepository) {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            Scaffold() {
-                HomeScreen(repository)
+            val navController = rememberNavController()
+            Scaffold(
+                topBar = { PokeHeader()},
+                bottomBar = { PokeBar(navController, itemList) }
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(it),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    MainNavigation(navController, itemList )
+                }
             }
         }
     }

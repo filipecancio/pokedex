@@ -7,9 +7,8 @@ import dev.cancio.finaldex.repository.PokemonRepository
 import dev.cancio.finaldex.ui.components.PokeItem
 
 @Composable
-fun HomeScreen(
-    repository: PokemonRepository
-) {
+fun HomeScreen() {
+    val repository = PokemonRepository()
     LazyColumn {
         items(
             items = repository.getPokemonList(),
