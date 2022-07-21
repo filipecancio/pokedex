@@ -14,15 +14,10 @@ fun HomeScreen(
     navController: NavHostController,
     viewModel: MainViewModel
 ) {
-    val repository = PokemonRepository()
     LazyColumn {
         items(
-            items = repository.getPokemonList(),
-            itemContent = { PokeItem(it) { aaa(navController,it.id.toString()) }}
+            items = viewModel.getPokemonOnHome(),
+            itemContent = { PokeItem(it) { viewModel.goToDetail(navController,it.id.toString()) }}
         )
     }
-}
-
-fun aaa(navController: NavController,id:String){
-    navController.navigate("detail/${id}")
 }

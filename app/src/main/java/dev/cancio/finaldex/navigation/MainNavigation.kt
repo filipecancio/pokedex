@@ -24,7 +24,7 @@ fun MainNavigation(navController: NavHostController,viewModel: MainViewModel) {
             "Detail/{pokemonId}",
             arguments = listOf(navArgument("pokemonId") { type = NavType.StringType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("pokemonId")?.let { DetailScreen(it) }
+            backStackEntry.arguments?.getString("pokemonId")?.let { DetailScreen(it,viewModel) }
         }
     }
 }

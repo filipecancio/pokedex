@@ -18,11 +18,11 @@ import androidx.compose.ui.Alignment
 import dev.cancio.finaldex.data.model.Pokemon
 import dev.cancio.finaldex.repository.PokemonRepository
 import dev.cancio.finaldex.ui.components.ImageWeb
+import dev.cancio.finaldex.viewmodel.MainViewModel
 
 @Composable
-fun DetailScreen(pokemonId: String) {
-    val repository = PokemonRepository()
-    val pokemon = repository.getPokemonDetail(pokemonId)
+fun DetailScreen(pokemonId: String,viewModel: MainViewModel) {
+    val pokemon = viewModel.getPokemon(pokemonId)
 
     var selectedItem by remember { mutableStateOf(pokemon.like) }
     var iconItem by remember { mutableStateOf(Icons.Outlined.Star) }
@@ -37,7 +37,7 @@ fun DetailScreen(pokemonId: String) {
                 onClick = {
                     selectedItem = !selectedItem
                     iconItem = if (selectedItem) Icons.Filled.Star else Icons.Outlined.Check
-                    PokemonRepository.updatePokemon(pokemonId)
+                    viewModel.updatePokemon(pokemonId)
                 },
             ) {
                 Icon(iconItem, contentDescription = "Localized description")

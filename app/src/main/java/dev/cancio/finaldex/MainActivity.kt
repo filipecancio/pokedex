@@ -13,9 +13,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val repository = PokemonRepository()
             val viewModel = MainViewModel()
-            AppScreen(repository, viewModel)
+            AppScreen(viewModel)
         }
     }
 }

@@ -24,7 +24,6 @@ import dev.cancio.finaldex.viewmodel.MainViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppScreen(
-    repository: PokemonRepository,
     viewModel: MainViewModel
 ) {
     FinaldexTheme {
