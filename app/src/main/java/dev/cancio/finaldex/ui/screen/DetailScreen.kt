@@ -1,7 +1,8 @@
 package dev.cancio.finaldex.ui.screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Star
@@ -15,10 +16,14 @@ import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import dev.cancio.finaldex.data.model.LikeType
 import dev.cancio.finaldex.data.model.Pokemon
 import dev.cancio.finaldex.repository.PokemonRepository
 import dev.cancio.finaldex.ui.components.ImageWeb
+import dev.cancio.finaldex.ui.components.PokeValues
 import dev.cancio.finaldex.viewmodel.MainViewModel
 
 @Composable
@@ -31,7 +36,11 @@ fun DetailScreen(pokemonId: String,viewModel: MainViewModel) {
     Box(
         contentAlignment = Alignment.Center
     ){
-        Column {
+        Column (
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
             ImageWeb(url = pokemon.avatarUrl)
             Text(text = pokemon.name)
             SmallFloatingActionButton(
@@ -43,6 +52,10 @@ fun DetailScreen(pokemonId: String,viewModel: MainViewModel) {
             ) {
                 Icon(iconItem, contentDescription = "Localized description")
             }
+            PokeValues("Força")
+            PokeValues("Velocidade")
+            PokeValues("Habilidade")
+            PokeValues("Dano")
         }
     }
 }
