@@ -1,15 +1,16 @@
 package dev.cancio.finaldex.repository
 
+import dev.cancio.finaldex.data.model.LikeType
 import dev.cancio.finaldex.data.model.Pokemon
 
 class PokemonRepository {
     private val pokemonList = mutableListOf(
-        Pokemon(1, "bulbasaur", true),
+        Pokemon(1, "bulbasaur"),
         Pokemon(2, "ivysaur"),
         Pokemon(3, "venusaur"),
         Pokemon(4, "charmander"),
         Pokemon(5, "charmeleon"),
-        Pokemon(6, "charizard"),
+        Pokemon(6, "charizard",LikeType.Like),
         Pokemon(7, "squirtle"),
         Pokemon(8, "wartortle"),
         Pokemon(9, "blastoise"),
@@ -36,16 +37,22 @@ class PokemonRepository {
         Pokemon(30, "nidorina")
     )
 
-    fun updatePokemon(pokemonId: String) {
-        pokemonList.map {
+    fun updatePokemon(pokemonId: String): LikeType  {
+        pokemonList.forEach {
             if (it.id == pokemonId.toInt()) {
-                it.like = !it.like
+                it.like = if (it.like == LikeType.Like) LikeType.Unlike else LikeType.Like
+                return it.like
             }
         }
+        return LikeType.Unlike
     }
 
     fun getAllPokemon(): MutableList<Pokemon> {
         return pokemonList
+    }
+
+    fun getLikePokemon(): MutableList<Pokemon> {
+        return pokemonList.filter{ it.like == LikeType.Like }.toMutableList()
     }
 
     fun getPokemonDetail(pokemonId: String): Pokemon {
