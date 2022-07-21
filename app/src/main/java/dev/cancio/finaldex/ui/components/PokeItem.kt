@@ -22,6 +22,10 @@ fun PokeItem(pokemon: Pokemon, callback: ()->Unit) {
     val navController = rememberNavController()
 
     ListItem(
+        modifier = Modifier.background(
+            shape = RoundedCornerShape(10.dp),
+            color = Color.LightGray
+        ).clickable(onClick = { callback() }),
         text = { Text(text = pokemon.name) },
         icon = {
             Box(
@@ -30,10 +34,9 @@ fun PokeItem(pokemon: Pokemon, callback: ()->Unit) {
                     .height(40.dp)
                     .background(
                         shape = RoundedCornerShape(30.dp),
-                        color = Color.White
+                        color = Color.Gray
                     )
                     .padding(5.dp)
-                    .clickable(onClick = { callback() })
             ) {
                 ImageWeb(
                     url = pokemon.avatarUrl,
