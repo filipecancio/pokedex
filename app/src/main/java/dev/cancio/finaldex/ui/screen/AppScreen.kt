@@ -13,11 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import dev.cancio.finaldex.navigation.MainNavigation
 import dev.cancio.finaldex.repository.PokemonRepository
-import dev.cancio.finaldex.ui.components.MainNavigation
 import dev.cancio.finaldex.ui.components.PokeBar
 import dev.cancio.finaldex.ui.components.PokeHeader
-import dev.cancio.finaldex.ui.components.PokedexRoutes.MainRoute.itemList
+import dev.cancio.finaldex.navigation.PokedexRoutes.MainRoute.itemList
 import dev.cancio.finaldex.ui.theme.FinaldexTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
