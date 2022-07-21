@@ -26,7 +26,7 @@ fun DetailScreen(pokemonId: String,viewModel: MainViewModel) {
     val pokemon = viewModel.getPokemon(pokemonId)
 
     var likedItem by remember { mutableStateOf(pokemon.like) }
-    var iconItem by remember { mutableStateOf(Icons.Outlined.Star) }
+    var iconItem by remember { mutableStateOf(pokemon.likeIcon) }
 
     Box(
         contentAlignment = Alignment.Center
@@ -38,7 +38,7 @@ fun DetailScreen(pokemonId: String,viewModel: MainViewModel) {
                 onClick = {
                     val likeType = viewModel.updatePokemon(pokemonId)
                     likedItem = likeType
-                    iconItem = if (likeType == LikeType.Like) Icons.Outlined.Check else Icons.Outlined.Star
+                    iconItem = pokemon.likeIcon
                 },
             ) {
                 Icon(iconItem, contentDescription = "Localized description")
@@ -47,6 +47,4 @@ fun DetailScreen(pokemonId: String,viewModel: MainViewModel) {
     }
 }
 
-fun updateLike(pokemon: Pokemon){
-
-}
+fun getIcon(likeType: LikeType) = if (likeType == LikeType.Like) Icons.Outlined.Check else Icons.Outlined.Star
