@@ -3,9 +3,10 @@ package dev.cancio.finaldex.repository
 import dev.cancio.finaldex.data.model.Pokemon
 
 class PokemonRepository {
-    fun getPokemonList(): MutableList<Pokemon> {
-        return mutableListOf<Pokemon>(
-            Pokemon(1,"bulbasaur"),
+
+    companion object{
+        val pokemonList = mutableListOf(
+            Pokemon(1,"bulbasaur",true),
             Pokemon(2,"ivysaur"),
             Pokemon(3,"venusaur"),
             Pokemon(4,"charmander"),
@@ -36,5 +37,21 @@ class PokemonRepository {
             Pokemon(29,"nidoran-f"),
             Pokemon(30,"nidorina")
         )
+
+        fun updatePokemon(pokemonId: String){
+            pokemonList.map {
+                if(it.id == pokemonId.toInt()){
+                    it.like = !it.like
+                }
+            }
+        }
+    }
+
+    fun getPokemonList(): MutableList<Pokemon> {
+        return pokemonList
+    }
+
+    fun getPokemonDetail(pokemonId: String):Pokemon{
+        return pokemonList.filter { it.id == pokemonId.toInt() }[0]
     }
 }

@@ -13,12 +13,13 @@ import androidx.navigation.navArgument
 import dev.cancio.finaldex.ui.screen.DetailScreen
 import dev.cancio.finaldex.ui.screen.HomeScreen
 import dev.cancio.finaldex.ui.screen.LikeScreen
+import dev.cancio.finaldex.viewmodel.MainViewModel
 
 @Composable
-fun MainNavigation(navController: NavHostController) {
+fun MainNavigation(navController: NavHostController,viewModel: MainViewModel) {
     NavHost(navController = navController, startDestination = "Home") {
-        composable("Home")  {  HomeScreen(navController) }
-        composable("Likes")  {  LikeScreen(navController) }
+        composable("Home")  {  HomeScreen(navController,viewModel) }
+        composable("Likes")  {  LikeScreen(navController,viewModel) }
         composable(
             "Detail/{pokemonId}",
             arguments = listOf(navArgument("pokemonId") { type = NavType.StringType })

@@ -19,10 +19,14 @@ import dev.cancio.finaldex.ui.components.PokeBar
 import dev.cancio.finaldex.ui.components.PokeHeader
 import dev.cancio.finaldex.navigation.PokedexRoutes.MainRoute.itemList
 import dev.cancio.finaldex.ui.theme.FinaldexTheme
+import dev.cancio.finaldex.viewmodel.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppScreen(repository: PokemonRepository) {
+fun AppScreen(
+    repository: PokemonRepository,
+    viewModel: MainViewModel
+) {
     FinaldexTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -39,7 +43,7 @@ fun AppScreen(repository: PokemonRepository) {
                         .padding(it),
                     contentAlignment = Alignment.Center,
                 ) {
-                    MainNavigation(navController)
+                    MainNavigation(navController,viewModel)
                 }
             }
         }
